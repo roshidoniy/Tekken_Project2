@@ -144,10 +144,9 @@ namespace Tekken_Project2
                 secondClicked.BackColor = Color.Black;
                 secondClicked.ForeColor = Color.Black;
             }
+            matchLabel.Text = "Matches: " + matchedCards;
             firstClicked = null;
             secondClicked = null;
-            // Clear match label if not matching
-            matchLabel.Text = "";
         }
     }
 }
