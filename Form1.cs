@@ -69,7 +69,7 @@ namespace Tekken_Project2
 
             // Create Restart button with red background
             restartButton = new Button();
-            restartButton.Text = "Restart";
+            restartButton.Text = "Start/Stop";
             restartButton.BackColor = Color.Red;
             restartButton.ForeColor = Color.White;
             restartButton.Size = new Size(80, 30);
@@ -111,7 +111,8 @@ namespace Tekken_Project2
             else
             {
                 secondClicked = button;
-                if (firstClicked.Tag.ToString() == secondClicked.Tag.ToString())
+                bool isMatch = firstClicked.Tag.ToString() == secondClicked.Tag.ToString();
+                if (isMatch)
                 {
                     // A match: disable both buttons
                     firstClicked.Enabled = false;
@@ -123,7 +124,8 @@ namespace Tekken_Project2
                 }
                 else
                 {
-                    // Not a match: start timer to flip them back
+                    // Not a match: show message box and start timer to flip them back
+                    MessageBox.Show("WRONG MATCH");
                     resetDelayTimer.Start();
                 }
             }
