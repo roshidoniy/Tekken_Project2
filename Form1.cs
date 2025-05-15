@@ -79,7 +79,7 @@ namespace Tekken_Project2
 
             // Create matchLabel to display match text beneath the restart button
             matchLabel = new Label();
-            matchLabel.Text = "";
+            matchLabel.Text = "Matches: 0";
             matchLabel.Size = new Size(200, 30);
             matchLabel.Location = new Point(startX, restartButton.Location.Y + restartButton.Height + spacing);
             this.Controls.Add(matchLabel);
