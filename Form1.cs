@@ -27,27 +27,22 @@ namespace Tekken_Project2
 
         private void StartNewGame()
         {
-            // Clear current controls and game state
             this.Controls.Clear();
             firstClicked = null;
             secondClicked = null;
             matchedCards = 0;
 
-            // Initialize list and random generator
             gameButtons = new List<Button>();
             buttonNumbers = new List<int>();
             rand = new Random();
 
-            // Create pairs of numbers from 1 to 8
             for (int i = 1; i <= 8; i++)
             {
                 buttonNumbers.Add(i);
                 buttonNumbers.Add(i);
             }
-            // Shuffle the numbers
             buttonNumbers = buttonNumbers.OrderBy(x => rand.Next()).ToList();
 
-            // Create a 4x4 grid of buttons
             int gridRows = 4, gridCols = 4;
             int buttonSize = 80, spacing = 10;
             int startX = 10, startY = 10;
@@ -67,7 +62,6 @@ namespace Tekken_Project2
                 }
             }
 
-            // Create Restart button with red background
             restartButton = new Button();
             restartButton.Text = "Start/Stop";
             restartButton.BackColor = Color.Red;
@@ -77,14 +71,12 @@ namespace Tekken_Project2
             restartButton.Click += (s, e) => StartNewGame();
             this.Controls.Add(restartButton);
 
-            // Create matchLabel to display match text beneath the restart button
             matchLabel = new Label();
             matchLabel.Text = "Matches: 0";
             matchLabel.Size = new Size(200, 30);
             matchLabel.Location = new Point(startX, restartButton.Location.Y + restartButton.Height + spacing);
             this.Controls.Add(matchLabel);
 
-            // Initialize timer for resetting non-matching buttons
             resetDelayTimer = new Timer();
             resetDelayTimer.Interval = 700;
             resetDelayTimer.Tick += ResetDelayTimer_Tick;
@@ -92,13 +84,11 @@ namespace Tekken_Project2
 
         private void GameButton_Click(object sender, EventArgs e)
         {
-            // Ignore if timer in progress
             if (resetDelayTimer.Enabled) return;
 
             Button button = sender as Button;
-            if (button == null || button.Text != "") return; // already revealed
+            if (button == null || button.Text != "") return; 
 
-            // Reveal the number and change color to yellow
             button.Text = button.Tag.ToString();
             button.BackColor = Color.Yellow;
             button.ForeColor = Color.Black;
@@ -114,17 +104,15 @@ namespace Tekken_Project2
                 bool isMatch = firstClicked.Tag.ToString() == secondClicked.Tag.ToString();
                 if (isMatch)
                 {
-                    // A match: disable both buttons
                     firstClicked.Enabled = false;
                     secondClicked.Enabled = false;
-                    matchedCards += 2; // increment matched cards count by 2
+                    matchedCards += 2;
                     matchLabel.Text = "Matches: " + matchedCards;
                     firstClicked = null;
                     secondClicked = null;
                 }
                 else
                 {
-                    // Not a match: show message box and start timer to flip them back
                     MessageBox.Show("WRONG MATCH");
                     resetDelayTimer.Start();
                 }
