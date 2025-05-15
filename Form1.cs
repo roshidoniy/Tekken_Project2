@@ -17,6 +17,8 @@ namespace Tekken_Project2
         private Button restartButton;
         private Random rand;
         private Label matchLabel;
+        private int matchCount = 0;
+        private Label scoreLabel;
 
         public Form1()
         {
@@ -30,6 +32,7 @@ namespace Tekken_Project2
             this.Controls.Clear();
             firstClicked = null;
             secondClicked = null;
+            matchCount = 0;
 
             // Initialize list and random generator
             gameButtons = new List<Button>();
@@ -82,6 +85,13 @@ namespace Tekken_Project2
             matchLabel.Location = new Point(startX, restartButton.Location.Y + restartButton.Height + spacing);
             this.Controls.Add(matchLabel);
 
+            // Create scoreLabel to display match count
+            scoreLabel = new Label();
+            scoreLabel.Text = "Matches: 0";
+            scoreLabel.Size = new Size(100, 30);
+            scoreLabel.Location = new Point(startX + 200, restartButton.Location.Y + restartButton.Height + spacing);
+            this.Controls.Add(scoreLabel);
+
             // Initialize timer for resetting non-matching buttons
             resetDelayTimer = new Timer();
             resetDelayTimer.Interval = 700;
@@ -114,7 +124,8 @@ namespace Tekken_Project2
                     // A match: disable both buttons
                     firstClicked.Enabled = false;
                     secondClicked.Enabled = false;
-                    // Display match text
+                    matchCount++; // increment match counter
+                    scoreLabel.Text = "Matches: " + matchCount;
                     matchLabel.Text = "Matched!";
                     firstClicked = null;
                     secondClicked = null;
