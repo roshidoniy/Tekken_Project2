@@ -16,6 +16,7 @@ namespace Tekken_Project2
         private Timer resetDelayTimer;
         private Button restartButton;
         private Random rand;
+        private Label matchLabel;
 
         public Form1()
         {
@@ -74,6 +75,13 @@ namespace Tekken_Project2
             restartButton.Click += (s, e) => StartNewGame();
             this.Controls.Add(restartButton);
 
+            // Create matchLabel to display match text beneath the restart button
+            matchLabel = new Label();
+            matchLabel.Text = "";
+            matchLabel.Size = new Size(200, 30);
+            matchLabel.Location = new Point(startX, restartButton.Location.Y + restartButton.Height + spacing);
+            this.Controls.Add(matchLabel);
+
             // Initialize timer for resetting non-matching buttons
             resetDelayTimer = new Timer();
             resetDelayTimer.Interval = 700;
@@ -106,6 +114,8 @@ namespace Tekken_Project2
                     // A match: disable both buttons
                     firstClicked.Enabled = false;
                     secondClicked.Enabled = false;
+                    // Display match text
+                    matchLabel.Text = "Matched!";
                     firstClicked = null;
                     secondClicked = null;
                 }
@@ -134,6 +144,8 @@ namespace Tekken_Project2
             }
             firstClicked = null;
             secondClicked = null;
+            // Clear match label if not matching
+            matchLabel.Text = "";
         }
     }
 }
