@@ -67,13 +67,6 @@ namespace Tekken_Project2
                 }
             }
 
-            // Create matchLabel to display match text above the restart button
-            matchLabel = new Label();
-            matchLabel.Text = "Matches: 0";
-            matchLabel.Size = new Size(200, 30);
-            matchLabel.Location = new Point(startX, restartButton.Location.Y - matchLabel.Size.Height - spacing);
-            this.Controls.Add(matchLabel);
-
             // Create Restart button with red background
             restartButton = new Button();
             restartButton.Text = "Restart";
@@ -83,6 +76,13 @@ namespace Tekken_Project2
             restartButton.Location = new Point(startX, startY + gridRows * (buttonSize + spacing) + spacing);
             restartButton.Click += (s, e) => StartNewGame();
             this.Controls.Add(restartButton);
+
+            // Create matchLabel to display match text beneath the restart button
+            matchLabel = new Label();
+            matchLabel.Text = "Matches: 0";
+            matchLabel.Size = new Size(200, 30);
+            matchLabel.Location = new Point(startX, restartButton.Location.Y + restartButton.Height + spacing);
+            this.Controls.Add(matchLabel);
 
             // Initialize timer for resetting non-matching buttons
             resetDelayTimer = new Timer();
