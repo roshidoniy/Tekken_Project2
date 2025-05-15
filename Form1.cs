@@ -17,6 +17,7 @@ namespace Tekken_Project2
         private Button restartButton;
         private Random rand;
         private Label matchLabel;
+        private int matchedCards = 0;
 
         public Form1()
         {
@@ -30,6 +31,7 @@ namespace Tekken_Project2
             this.Controls.Clear();
             firstClicked = null;
             secondClicked = null;
+            matchedCards = 0;
 
             // Initialize list and random generator
             gameButtons = new List<Button>();
@@ -114,8 +116,8 @@ namespace Tekken_Project2
                     // A match: disable both buttons
                     firstClicked.Enabled = false;
                     secondClicked.Enabled = false;
-                    // Display match text
-                    matchLabel.Text = "Matched!";
+                    matchedCards += 2; // increment matched cards count by 2
+                    matchLabel.Text = "Matches: " + matchedCards;
                     firstClicked = null;
                     secondClicked = null;
                 }
